@@ -14,6 +14,14 @@
 
     <h1>{{ arreglo[0] }}</h1>
 
+    <br />
+    <label for="nombre_1">Nombre:</label>
+    <input type="text" id="nombre_1" v-model="nombre">
+
+    <br />
+    <label for="apellido_1">Apellido:</label>
+    <input type="text" id="apellido_1" v-model="apellido" v-on:keypress.enter="agregarEstudiante1($event)">
+
     <ul>
       <li v-show="nombre !== null" v-for="{nombre, apellido} in arreglo" :key="nombre">
         {{ nombre }} - {{ apellido }}
@@ -60,15 +68,36 @@ export default {
             this.limpiarFormulario();
         },
 
+        agregarEstudiante1(event) {
+          if (event.charCode !== 13) {
+            return;
+          }
+          console.log("presiono el enter");
+
+            console.log("Se agrego un estudiante en keypress");
+            console.log(event);
+            console.log(event.chartCode);
+
+            const estudiante1 = {
+                nombre: this.nombre,
+                apellido: this.apellido,
+            };
+            console.log("Se agrego un estudiante");
+            console.log(estudiante1);
+            this.arreglo.push(estudiante1);
+            this.limpiarFormulario();
+
+        },
+
         limpiarFormulario() {
             this.nombre = null;
             this.apellido = null;
         },
     },
 };
-</script>
+</script >
 
-<style>
+<style scoped>
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
