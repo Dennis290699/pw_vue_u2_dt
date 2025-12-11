@@ -80,19 +80,5 @@ export default {
 </script>
 
 <style>
-section {
-  display: flex;
-  justify-content: center;
-  /* flex-direction: column; */
-}
 
-button {
-  margin: 15px;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  background-color: #42b983;
-  color: white;
-}
 </style>

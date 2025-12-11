@@ -32,12 +32,16 @@
 
     <table>
       <thead>
-        <th>Nombre</th>
-        <th>Apellido</th>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+        </tr>
       </thead>
       <tbody v-for="{nombre, apellido} in arreglo" :key="nombre">
-        <td>{{ nombre }}</td>
-        <td>{{ apellido }}</td>
+        <tr>
+          <td>{{ nombre }}</td>
+          <td>{{ apellido }}</td>
+        </tr>
       </tbody>
     </table>
 
