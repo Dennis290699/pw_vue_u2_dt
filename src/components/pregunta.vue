@@ -2,25 +2,54 @@
     <div class="container">
 
         <div class="img-container">
-            <img src="https://yesno.wtf/assets/yes/5-64c2804cc48057b94fd0b3eaf323d92c.gif" alt="No hay imagen">
+            <img :src="imagen" alt="No hay imagen">
         </div>
 
         <div class="form-container">
             <label for="pregunta">Recuerda terminar con el simbolo de interrogacion ?</label>
-            <input type="text" v-model="pregunta" id="pregunta" placeholder="Hazme una pregunta" />
+            <input type="text" v-model="pregunta" id="pregunta" placeholder="Hazme una pregunta" @change="enviarPregunta()" />
             
-            <div class="btn-container">
+            <!-- <div class="btn-container">
                 <button>Enviar</button>
-            </div>
-            <h2>Sere millonario</h2>
-            <h2>YES, NO</h2>   
+            </div> -->
+            <h2>{{ pregunta }}</h2>
+            <h2>{{ respuesta }}</h2>   
         </div>
     </div>
 </template>
 
 <script>
 
+import { consumirApiFacade } from "@/clients/YesNoClient";
+
 export default {
+    data() {
+        return {
+            pregunta: null,
+            respuesta: null,
+            imagen: null
+        }
+    },
+    watch: {
+        pregunta(value, oldValue) {
+            console.log("value", value)
+            console.log("oldValue", oldValue)
+
+            if(value.includes("?")) {
+                this.respuesta = "Pensando..."
+                this.enviarPregunta()
+            }
+        }
+    },
+    methods: {
+        async enviarPregunta() {
+            const data = await consumirApiFacade();
+            if (data) {
+                this.respuesta = data.answer;
+                this.imagen = data.image;
+            }
+        }
+    }
 }
 </script>
 
