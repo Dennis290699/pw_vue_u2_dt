@@ -3,6 +3,7 @@
 
         <div class="img-container">
             <img :src="imagen" alt="No hay imagen">
+            <div class="overlay"></div>
         </div>
 
         <div class="form-container">
@@ -21,13 +22,14 @@
 <script>
 
 import { consumirApiFacade } from "@/clients/YesNoClient";
+import fondo from "../../public/assets/1.jpg";
 
 export default {
     data() {
         return {
             pregunta: null,
             respuesta: null,
-            imagen: null
+            imagen: fondo
         }
     },
     watch: {
@@ -76,17 +78,27 @@ export default {
 }
 
 .img-container {
-    min-height: 100%;
-    min-width: 100%;
-}
-
-.img-container img {
-    min-height: 100%;
-    min-width: 100%;
     position: fixed;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+}
+
+.img-container .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Oscuridad */
 }
 
 .form-container {
